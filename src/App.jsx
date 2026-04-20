@@ -5,6 +5,7 @@ import {
   Minus, FileText, Activity, Zap, Info, X, Loader2, Search
 } from 'lucide-react';
 import Background3D from './Background3D';
+import AICoach from './AICoach';
 
 /* ─── Framer Motion Variants ─────────────────────────────── */
 const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } } };
@@ -504,6 +505,24 @@ export default function App() {
           </div>
         </motion.div>
       </div>
+      <AICoach
+        foods={foods}
+        goal={goal}
+        totalCals={Math.round(totalCals)}
+        totalProtein={Math.round(totalProtein)}
+        totalCarbs={Math.round(totalCarbs)}
+        totalFat={Math.round(totalFat)}
+        streak={streak}
+        theme={theme}
+        onAddFood={(food) => {
+          setFoods(fs => [{ ...food, id: Date.now() }, ...fs]);
+          showToast('✅ ' + food.name + ' added by NutriCoach!');
+        }}
+        onSetGoal={(cal) => {
+          setGoal(cal);
+          showToast('🎯 Goal updated to ' + cal + ' kcal!');
+        }}
+      />
     </div>
   );
 }
